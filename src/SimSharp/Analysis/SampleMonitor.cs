@@ -92,11 +92,28 @@ namespace SimSharp {
     private static double GetPercentile(IList<double> s, double p) {
       if (p < 0 || p > 1) throw new ArgumentException("Percentile must be between 0 and 1", "p");
       if (s.Count == 0) return double.NaN;
+      
+      // Sort once instead of sorting multiple times with LINQ
+      var sorted = s is List<double> list ? list.ToArray() : s.ToArray();
+      
+#if NET9_0_OR_GREATER
+      // .NET 9+ has improved sorting performance
+      Array.Sort(sorted);
+#else
+      Array.Sort(sorted);
+#endif
+      
       var n = s.Count * p;
       var k = (int)Math.Ceiling(n);
+      
       if (n < k)
-        return s.OrderBy(x => x).Skip(k - 1).First();
-      return s.OrderBy(x => x).Skip(k - 1).Take(2).Average();
+        return sorted[k - 1];
+      
+      // Linear interpolation for more accurate percentiles
+      if (k - 1 < sorted.Length - 1)
+        return (sorted[k - 1] + sorted[k]) / 2.0;
+      
+      return sorted[k - 1];
     }
 
     public SampleMonitor(string name = null, bool collect = false) {

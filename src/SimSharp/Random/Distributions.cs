@@ -913,7 +913,7 @@ namespace SimSharp {
     public override T Sample(IRandom random) {
       if (TrySample(random, out var sample))
         return sample;
-      var strRange = (excludeLower ? "]" : "[") + lower + ":" + upper + (excludeUpper ? "[" : "]");
+      var strRange = $"{(excludeLower ? "]" : "[")}{lower}:{upper}{(excludeUpper ? "[" : "]")}";
       throw new InvalidOperationException($"Unable to sample a value in the interval {strRange} in {ntries} tries.");
     }
 

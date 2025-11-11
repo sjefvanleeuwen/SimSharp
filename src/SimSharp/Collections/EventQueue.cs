@@ -49,7 +49,12 @@ namespace SimSharp {
     /// </summary>
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     public void Clear() {
+#if NET9_0_OR_GREATER
+      // .NET 9+ has optimized span-based Clear
+      _nodes.AsSpan(1, _numNodes).Clear();
+#else
       Array.Clear(_nodes, 1, _numNodes);
+#endif
       _numNodes = 0;
     }
 
