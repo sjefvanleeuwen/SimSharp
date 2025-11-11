@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 /*
 The MIT License (MIT)
 
@@ -358,7 +358,7 @@ namespace SimSharp {
       }
 
       if (maxNodes < _numNodes) {
-        throw new InvalidOperationException("Called Resize(" + maxNodes + "), but current queue contains " + _numNodes + " nodes");
+        throw new InvalidOperationException($"Called Resize({maxNodes}), but current queue contains {_numNodes} nodes");
       }
 #endif
 
@@ -808,7 +808,7 @@ namespace SimSharp {
       }
 
       if (maxNodes < _numNodes) {
-        throw new InvalidOperationException("Called Resize(" + maxNodes + "), but current queue contains " + _numNodes + " nodes");
+        throw new InvalidOperationException($"Called Resize({maxNodes}), but current queue contains {_numNodes} nodes");
       }
 #endif
 
@@ -931,3 +931,4 @@ namespace SimSharp {
     }
   }
 }
+
