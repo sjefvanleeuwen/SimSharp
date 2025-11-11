@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
-    <Version>3.4</Version>
+    <TargetFramework>net9.0</TargetFramework>
+    <Version>3.5.0</Version>
     <Authors>Andreas Beham</Authors>
     <Company>HEAL, FH Upper Austria</Company>
     <Product>Sim# (Samples)</Product>
